@@ -7,10 +7,10 @@
 var wins = 0;
 var losses = 0;
 var scoreTotal = 0;
-var targetNumber = [];
 var gemValue = [];
+var randomTargetNumber =[Math.floor(Math.random())];
+// [Math.floor(Math.random() * 120 - 19) + 19]
 
-var randomTargetNumber = targetNumber[Math.floor(Math.random() * 120-19) + 19];
 
 var randomGemValue = gemValue[Math.floor(Math.random() * 13) + 1];
 
@@ -21,29 +21,27 @@ var lossText = document.getElementById("losses-text");
 var numberText = document.getElementById("number-text");
 var scoreText = document.getElementById("score-text");
 
-function intializeGame(num){
+function intializeGame(){
     
-    wins = num; 
-    losses = num;
-    scoreTotal = num;
-    targetNumber = [];
-    console.log(targetNumber),
+    wins = 0; 
+    losses = 0;
+    scoreTotal = 0;
+    
     gemValue=[];
     updateDom();
-    generateRandomTargetNum();
+    generateRandomTargetNum(19,120);
 
     
 };
-intializeGame(0);
+intializeGame();
 
 
 
 function resetGame(){
     scoreTotal = 0;
-    // targetNumber = [];
     gemValue=[];
     updateDom();
-    generateRandomTargetNum();
+    generateRandomTargetNum(19, 120);
 
 };
 
@@ -54,25 +52,35 @@ function updateDom(){
     directionsText.textContent = ""
     winsText.textContent = "Wins: " + wins;
     lossText.textContent = "Losses: " + losses;
-    numberText.textContent = "Target Number: " + targetNumber;
+    numberText.textContent = "Target Number: " + randomTargetNumber;
     scoreText.textContent = "Your Score: " + scoreTotal;
    
 }
 
 updateDom();
 
-function generateRandomTargetNum(){
-    randomTargetNumber = targetNumber[Math.floor(Math.random() * 120-19) + 19];
+function generateRandomTargetNum(min, max){
+    randomTargetNumber = Math.floor(Math.random() * (max-min)) + min;
+    
 };
 
-generateRandomTargetNum();
-console.log(generateRandomTargetNum);
+generateRandomTargetNum(19, 120);
+
 
 function generateRandomGemValue() {
     randomeGemValue = gemValue[Math.floor(Math.random() * 13) + 1];
 };
 
 generateRandomGemValue();
+
+// click function below
+
+$(document).ready(function(){
+    $("img").click(function(){ //the "p" here is the 
+      alert("It worked!");
+      console.log("hi")
+    });
+  });
 
 
 
@@ -81,14 +89,14 @@ function compareTargetNumberGemTotal(){
 
     // if(compChoice.indexOf(userGuess) !== -1){
     //     console.log(userGuess);
-        if (scoreTotal === targetNumber) {
+        if (scoreTotal === randomTargetNumber) {
             wins++;
             updateDom();
             resetGame();
             generateRandomTargetNum();
             generateRandomGemValue();
            
-        } else if (scoreTotal > targetNumber) {
+        } else if (scoreTotal > randomTargetNumber) {
             losses--;
             updateDom();
             resetGame();
@@ -99,6 +107,8 @@ function compareTargetNumberGemTotal(){
 }
 
 compareTargetNumberGemTotal();
+
+
 
 
 // 2: During the game:
