@@ -10,36 +10,48 @@ var scoreTotal = 0;
 var targetNumber = [];
 var gemValue = [];
 
-var randomTargetNumber = targetNumber[Math.floor(Math.random() * targetNumber.length)];
+var randomTargetNumber = targetNumber[Math.floor(Math.random() * 120-19) + 19];
 
-var randomGemValue = gemValue[Math.floor(Math.random() * gemValue.length)];
+var randomGemValue = gemValue[Math.floor(Math.random() * 13) + 1];
 
         
 var directionsText = document.getElementById("directions-text");
-var winsText = document.getElementById("wins-text");
+var winsText = document.getElementById("wins-text"); 
 var lossText = document.getElementById("losses-text");
 var numberText = document.getElementById("number-text");
 var scoreText = document.getElementById("score-text");
 
-function intializeGame(){
-    wins = 0; 
-    losses = 0;
-    scoreTotal = 0;
+function intializeGame(num){
+    
+    wins = num; 
+    losses = num;
+    scoreTotal = num;
     targetNumber = [];
+    console.log(targetNumber),
     gemValue=[];
+    updateDom();
+    generateRandomTargetNum();
+
     
 };
+intializeGame(0);
+
+
 
 function resetGame(){
     scoreTotal = 0;
-    targetNumber = [];
+    // targetNumber = [];
     gemValue=[];
-    
     updateDom();
+    generateRandomTargetNum();
+
 };
 
+resetGame();
+
 function updateDom(){
-    directionsText.textContent = "";
+    
+    directionsText.textContent = ""
     winsText.textContent = "Wins: " + wins;
     lossText.textContent = "Losses: " + losses;
     numberText.textContent = "Target Number: " + targetNumber;
@@ -47,15 +59,46 @@ function updateDom(){
    
 }
 
+updateDom();
+
 function generateRandomTargetNum(){
-    randomTargetNumber = targetNumber[Math.floor(Math.random() * targetNumber.length)];
+    randomTargetNumber = targetNumber[Math.floor(Math.random() * 120-19) + 19];
 };
+
+generateRandomTargetNum();
+console.log(generateRandomTargetNum);
 
 function generateRandomGemValue() {
-    randomeGemValue = gemValue[Math.floor(Math.random() * gemValue.length)];
+    randomeGemValue = gemValue[Math.floor(Math.random() * 13) + 1];
 };
 
+generateRandomGemValue();
 
+
+
+
+function compareTargetNumberGemTotal(){
+
+    // if(compChoice.indexOf(userGuess) !== -1){
+    //     console.log(userGuess);
+        if (scoreTotal === targetNumber) {
+            wins++;
+            updateDom();
+            resetGame();
+            generateRandomTargetNum();
+            generateRandomGemValue();
+           
+        } else if (scoreTotal > targetNumber) {
+            losses--;
+            updateDom();
+            resetGame();
+            generateRandomTargetNum();
+            generateRandomGemValue();
+            
+        }
+}
+
+compareTargetNumberGemTotal();
 
 
 // 2: During the game:
