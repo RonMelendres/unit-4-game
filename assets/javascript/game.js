@@ -4,27 +4,21 @@ var scoreTotal = 0;
 var randomTargetNumber = [Math.floor(Math.random())];
 // [Math.floor(Math.random() * 120 - 19) + 19]
 
-// var randomGemValue = [Math.floor(Math.random())];
-
-var randomRubyValue = [Math.floor(Math.random())];
-var randomSapphireValue = [Math.floor(Math.random())];
-var randomEmeraldValue = [Math.floor(Math.random())];
-var randomDiamondValue = [Math.floor(Math.random())];
+// var randomRubyValue = [Math.floor(Math.random())];
+// var randomSapphireValue = [Math.floor(Math.random())];
+// var randomEmeraldValue = [Math.floor(Math.random())];
+// var randomDiamondValue = [Math.floor(Math.random())];
 
 
-var directionsText = document.getElementById("directions-text");
-var winsText = document.getElementById("wins-text");
-var lossText = document.getElementById("losses-text");
-var numberText = document.getElementById("number-text");
-var scoreText = document.getElementById("score-text");
+var directionsText = $("#directions-text");
+var winsText = $("#wins-text").text("Wins: " + wins);
+var lossText = $("#losses-text").text("Losses: " + losses); 
+var scoreText = $("#score-text").text("Your Score: " + scoreTotal);
 
-var ruby = document.getElementById("gem-1") || randomRubyValue;
-randomRubyValue = [Math.floor(Math.random())];
-
-
-var sapphire = document.getElementById("gem-2");
-var emerald = document.getElementById("gem-3");
-var diamond = document.getElementById("gem-4");
+var ruby = $("#gem-1"); 
+var sapphire = $("#gem-2");
+var emerald = $("#gem-3");
+var diamond = $("#gem-4");
 
 
 
@@ -42,16 +36,13 @@ intializeGame();
 
 function resetGame() {
     scoreTotal = 0;
-    // gemValue=[];
     updateDom();
     generateRandomTargetNum(19, 120);
     console.log(randomTargetNumber);
 
-    // generateRandomGemValue(1, 12);
     generateRandomRubyValue(1, 12);
     generateRandomSapphireValue(1, 12);
 
-    // console.log(randomGemValue);
     // console.log(generateRandomGemValue);
     // console.log(randomRubyValue);
 
@@ -67,12 +58,15 @@ function updateDom() {
     numberText.textContent = "Target Number: " + randomTargetNumber;
     scoreText.textContent = "Your Score: " + scoreTotal;
 
-}
+};
 
 updateDom();
 
+var numberText = $("#number-text").text("Target Number: " + generateRandomTargetNum(19, 120));
+
 function generateRandomTargetNum(min, max) {
     randomTargetNumber = Math.floor(Math.random() * (max - min)) + min;
+    numberText = $("#number-text").text("Target Number: " + randomTargetNumber);
 
 };
 
@@ -98,6 +92,7 @@ function generateRandomRubyValue(min, max) {
 
 generateRandomRubyValue(1, 12);
 
+
 function generateRandomSapphireValue(min, max) {
 
     randomSapphireValue = Math.floor(Math.random() * (max - min)) + min;
@@ -108,15 +103,36 @@ function generateRandomSapphireValue(min, max) {
 generateRandomSapphireValue(1, 12);
 
 
+function generateRandomEmeraldValue(min, max) {
+
+    randomEmeraldValue = Math.floor(Math.random() * (max - min)) + min;
+
+    console.log("emerald" + randomEmeraldValue);
+};
+
+generateRandomEmeraldValue(1, 12);
+
+function generateRandomDiamondValue(min, max) {
+
+    randomDiamondValue = Math.floor(Math.random() * (max - min)) + min;
+
+    console.log("diamond" + randomDiamondValue);
+};
+
+generateRandomDiamondValue(1, 12);
+
+
+
 // click functions for each gem below.
 
 $(document).ready(function () {
     $(ruby).click(function () {  
 
-    scoreTotal = scoreTotal + ruby //(the variable connected to the ruby)
-    $("#score-text, scoreText").html(scoreTotal); //(this connects the score to that html text)
+    // scoreTotal += "Your Score: " + randomRubyValue; //(the variable connected to the ruby)
+    $("#score-text").html(scoreTotal); //(this connects the score to that html text)
     // compareTargetNumberGemTotal ();  //(this calls out that if and else statement function into this gem function. Do that same for other gems)
-
+    
+    scoreTotal += randomRubyValue;
         alert("It worked!");
         console.log("ruby")
 
@@ -125,9 +141,11 @@ $(document).ready(function () {
     $(sapphire).click(function () { 
 
     
-    scoreTotal = scoreTotal + sapphire 
+    // scoreTotal = "Your Score: " + randomSapphireValue; 
     $("#score-text").html(scoreTotal); 
     // compareTargetNumberGemTotal ();  
+
+        scoreTotal += randomSapphireValue;
 
         alert("It worked!");
         console.log("sapphire")
@@ -136,9 +154,11 @@ $(document).ready(function () {
 
     $(emerald).click(function () {  
 
-    scoreTotal = scoreTotal + emerald 
+    // scoreTotal = "Your Score: " + randomEmeraldValue; 
     $("#score-text").html(scoreTotal); 
     // compareTargetNumberGemTotal (); 
+
+    scoreTotal += randomEmeraldValue;
 
         alert("It worked!");
         console.log("emerald")
@@ -147,9 +167,11 @@ $(document).ready(function () {
 
     $(diamond).click(function () {  
 
-    scoreTotal = scoreTotal + diamond 
+    // scoreTotal = "Your Score: "+ randomDiamondValue; 
     $("#score-text").html(scoreTotal); 
     // compareTargetNumberGemTotal ();  
+
+    scoreTotal += randomDiamondValue;
 
         alert("It worked!");
         console.log("diamond")
