@@ -1,7 +1,7 @@
 var wins = 0;
 var losses = 0;
 var scoreTotal = 0;
-var randomTargetNumber = [Math.floor(Math.random())];
+// var randomTargetNumber = [Math.floor(Math.random())];
 // [Math.floor(Math.random() * 120 - 19) + 19]
 
 // var randomRubyValue = [Math.floor(Math.random())];
@@ -21,29 +21,33 @@ var emerald = $("#gem-3");
 var diamond = $("#gem-4");
 
 
-
 function intializeGame() {
 
     wins = 0;
     losses = 0;
     scoreTotal = 0;
+    
     generateRandomTargetNum(19, 120);
-    // generateRandomGemValue(1, 12);
+    generateRandomRubyValue(1, 12);
+    generateRandomSapphireValue(1, 12);
+    generateRandomEmeraldValue(1, 12);
+    generateRandomDiamondValue(1, 12);
+
     console.log(randomTargetNumber);
-    // console.log(randomGemValue);
 };
 intializeGame();
 
 function resetGame() {
     scoreTotal = 0;
+    
     updateDom();
     generateRandomTargetNum(19, 120);
     console.log(randomTargetNumber);
 
     generateRandomRubyValue(1, 12);
     generateRandomSapphireValue(1, 12);
-
-    // console.log(generateRandomGemValue);
+    generateRandomEmeraldValue(1, 12);
+    generateRandomDiamondValue(1, 12);
     // console.log(randomRubyValue);
 
 };
@@ -72,16 +76,6 @@ function generateRandomTargetNum(min, max) {
 
 generateRandomTargetNum(19, 120);
 
-// function generateRandomGemValue(min, max) {
-//     randomRubyValue = Math.floor(Math.random() * (max - min)) + min;
-//     randomSapphireValue = Math.floor(Math.random() * (max - min)) + min;
-//     randomEmeraldValue = Math.floor(Math.random() * (max - min)) + min;
-//     randomDiamondValue = Math.floor(Math.random() * (max - min)) + min;
-//     console.log("ruby" + randomRubyValue);
-//     console.log("sapphire" + randomSapphireValue);
-// };
-
-// generateRandomGemValue(1, 12);
 
 function generateRandomRubyValue(min, max) {
     randomRubyValue = Math.floor(Math.random() * (max - min)) + min;
@@ -90,18 +84,12 @@ function generateRandomRubyValue(min, max) {
 
 };
 
-generateRandomRubyValue(1, 12);
-
-
 function generateRandomSapphireValue(min, max) {
 
     randomSapphireValue = Math.floor(Math.random() * (max - min)) + min;
 
     console.log("sapphire" + randomSapphireValue);
 };
-
-generateRandomSapphireValue(1, 12);
-
 
 function generateRandomEmeraldValue(min, max) {
 
@@ -110,17 +98,12 @@ function generateRandomEmeraldValue(min, max) {
     console.log("emerald" + randomEmeraldValue);
 };
 
-generateRandomEmeraldValue(1, 12);
-
 function generateRandomDiamondValue(min, max) {
 
     randomDiamondValue = Math.floor(Math.random() * (max - min)) + min;
 
     console.log("diamond" + randomDiamondValue);
 };
-
-generateRandomDiamondValue(1, 12);
-
 
 
 // click functions for each gem below.
@@ -179,28 +162,28 @@ $(document).ready(function () {
     });
 });
 
-gemValues();
+// gemValues();
 
-function gemValues() {
-    if (randomRubyValue === randomSapphireValue) {
-        generateRandomSapphireValue(1, 12);
-    }
-}
+// function gemValues() {
+//     if (randomRubyValue === randomSapphireValue) {
+//         generateRandomSapphireValue(1, 12);
+//     }
+// }
 
 
 
-scoring();
+// scoring();
 
-function scoring() {
-    if ($(ruby).click(function(){})) {
-        scoreTotal += randomRubyValue;
-};
+// function scoring() {
+//     if ($(ruby).click(function(){})) {
+//         scoreTotal += randomRubyValue;
+// };
 
 // Click/Scoring
 // 1: When you click on a gem, the score will increase.
 // 2: Each gem should have a different value and one gem must have a value of one.
 
-
+compareTargetNumberGemTotal();
 function compareTargetNumberGemTotal() {
 
     // if(compChoice.indexOf(userGuess) !== -1){
@@ -210,19 +193,15 @@ function compareTargetNumberGemTotal() {
         updateDom();
         resetGame();
         generateRandomTargetNum();
-        generateRandomGemValue();
-
+        
     } else if (scoreTotal > randomTargetNumber) {
         losses--;
         updateDom();
         resetGame();
         generateRandomTargetNum();
-        generateRandomGemValue();
 
     }
 }
-
-compareTargetNumberGemTotal();
 
 // 2: During the game:
     // a: Once a gem is clicked, the value of that gem increases score. The value for each gem is different.
@@ -232,4 +211,3 @@ compareTargetNumberGemTotal();
         // -Resets the player score to 0.
         // -Randomly sets the target number value.
         // -Randomly sets the value of each gem. 
-}
