@@ -1,0 +1,48 @@
+body{
+    width: 
+}
+
+h1{
+    font-size: 50px;
+    text-align: center;
+}
+
+#directions-text{
+    color: black;
+    font-size: 20px;
+    background-color: lightgray;
+    line-height: 1.6;
+}
+
+#imageDiv{
+    padding-top: 150px;
+    padding-left: 275px;
+}
+
+#wins-text{
+    text-align: center;
+    font-size: 30px;
+}
+
+#losses-text{
+    text-align: center;
+    font-size: 30px;
+
+}
+
+#number-text{
+    text-align: center;
+    font-size: 30px;
+
+}
+
+#score-text{
+    text-align: center;
+    font-size: 30px;
+
+}
+
+
+
+
+

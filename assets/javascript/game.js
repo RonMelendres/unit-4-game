@@ -10,16 +10,13 @@ $(document).ready(function () {
     var scoreText = $("#score-text").text("Your Score: " + scoreTotal);
     var randomTargetNumber = 0;
 
-    //resets variables wins, losses, scoretotal to 0
-    //
     function InitializeGame() {
 
         wins = 0;
         losses = 0;
         scoreTotal = 0;
         createDomImageElements();
-        generateRandomTargetNum(19, 120);//come back to this
-        //dynamically generate DOM image elements
+        generateRandomTargetNum(19, 120);
 
     }
 
@@ -32,8 +29,6 @@ $(document).ready(function () {
         for (var j = 0; j < imageArr.length; j++) {
             $("#gem" + j).attr("data-crystalvalue", generateRandomValue(1, 12));
         }
-
-    
 
         // updateDom();
     }
@@ -88,23 +83,17 @@ $(document).ready(function () {
     function generateRandomTargetNum(min, max) {
         randomTargetNumber = Math.floor(Math.random() * (max - min)) + min;
         numberText = $("#number-text").text("Target Number: " + randomTargetNumber);
-        console.log(randomTargetNumber);
+        // console.log(randomTargetNumber);
 
     };
 
     InitializeGame();
  
-
-
-    // $("#").click(function () { 
-    // $(document).on("click", ".gem", function() {
     $("#imageDiv").on("click", ".gem", function () {
         var gemValue = ($(this).attr("data-crystalvalue"));
         gemValue = parseInt(gemValue);
 
         scoreTotal = scoreTotal + gemValue;
-        // scoreText = $("#score-text").text("Your Score: " + scoreTotal);
-        
         
         if (scoreTotal === randomTargetNumber) {
             wins++;
