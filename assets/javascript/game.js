@@ -82,12 +82,37 @@ $(document).ready(function () {
     InitializeGame()
     
 
-    $(".gem").click(function () {  
+    $(".gem").click(function () { 
+        $("#score-text").html("Your Score: " + scoreTotal);
 
-        scoreTotal = generateRandomValue(1, 12);
-        console.log("HELLLO!");
+        var gemValue = ($(this).attr("data-crystalvalue"));
+        gemValue = parseInt(gemValue);
+
+        
+        scoreTotal += gemValue;
+
+        // generateRandomValue(1,12);
+        
+        
+
+        // scoreTotal += randomValue;
+
+        // if ($(".gem").click(function(){
+        //     var randomValue = Math.floor(Math.random() * (12 - 1)) + 1;
+        //     scoreTotal += randomVaule;
+        // })
+
+        
+            
+            
+        
+
+        
+        
+        
+        // console.log("HELLLO!");
         console.log(this);
-    });
+    ;
     
     //when you click on the image gem, the the value of that gem gets added to the total score.
     
@@ -198,4 +223,4 @@ $(document).ready(function () {
 
 //     }
 // }
-
+});
