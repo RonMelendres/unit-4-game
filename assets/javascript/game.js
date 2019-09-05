@@ -1,35 +1,47 @@
 $(document).ready(function () {
-    var imageArr = ["ruby.jpeg", "sapphire.jpeg","emerald.jpeg", "diamond.jpeg"];
+
+    var imageArr = ["ruby.jpeg", "sapphire.jpeg", "emerald.jpeg", "diamond.jpeg"];
     var wins = 0;
     var losses = 0;
     var scoreTotal = 0;
     var directionsText = $("#directions-text");
     var winsText = $("#wins-text").text("Wins: " + wins);
-    var lossText = $("#losses-text").text("Losses: " + losses); 
+    var lossText = $("#losses-text").text("Losses: " + losses);
     var scoreText = $("#score-text").text("Your Score: " + scoreTotal);
-    // var ruby = $("#gem-1"); 
-    // var sapphire = $("#gem-2");
-    // var emerald = $("#gem-3");
-    // var diamond = $("#gem-4");
+    var randomTargetNumber = 0;
 
     //resets variables wins, losses, scoretotal to 0
     //
-    function InitializeGame(){
+    function InitializeGame() {
 
         wins = 0;
         losses = 0;
         scoreTotal = 0;
-        createDomImageElements()
-        generateRandomTargetNum(19, 120)//come back to this
-
+        createDomImageElements();
+        generateRandomTargetNum(19, 120);//come back to this
         //dynamically generate DOM image elements
 
     }
 
-    function createDomImageElements(){
+    function resetGame() {
+        scoreTotal = 0;
+        scoreText = $("#score-text").text("Your Score: " + scoreTotal);
+        generateRandomTargetNum(19, 120);
+        generateRandomValue();
+
+        for (var j = 0; j < imageArr.length; j++) {
+            $("#gem" + j).attr("data-crystalvalue", generateRandomValue(1, 12));
+        }
+
+    
+
+        // updateDom();
+    }
+
+    function createDomImageElements() {
 
 
-        for (var i =0; i < imageArr.length; i++){
+        for (var i = 0; i < imageArr.length; i++) {
             //for each str generate a new img tag and append to page
             // Next we create a for loop to create crystals for every numberOption.
 
@@ -39,6 +51,7 @@ $(document).ready(function () {
             // First each crystal will be given the class ".crystal-image".
             // This will allow the CSS to take effect.
             imageCrystal.addClass("gem");
+            imageCrystal.attr("id", "gem" + i);
 
             // Each imageCrystal will be given a src link to the crystal image
             imageCrystal.attr("src", "assets/images/" + imageArr[i]);
@@ -49,8 +62,8 @@ $(document).ready(function () {
 
             // Lastly, each crystal image (with all it classes and attributes) will get added to the page.
             $("#imageDiv").append(imageCrystal);
-        }      
-    
+        }
+
     }
 
     function generateRandomValue(min, max) {
@@ -64,163 +77,51 @@ $(document).ready(function () {
     function updateDom() {
 
         directionsText.textContent = ""
-        winsText.textContent = "Wins: " + wins;
-        lossText.textContent = "Losses: " + losses;
-        // numberText.textContent = "Target Number: " + randomTargetNumber;
-        scoreText.textContent = "Your Score: " + scoreTotal;
+        winsText = $("#wins-text").text("Wins: " + wins);
+        lossText = $("#losses-text").text("Losses: " + losses);
+        scoreText = $("#score-text").text("Your Score: " + scoreTotal);
 
     };
 
-    var numberText = $("#number-text").text("Target Number: " + generateRandomTargetNum(19, 120));
+    var numberText = 0;
 
     function generateRandomTargetNum(min, max) {
         randomTargetNumber = Math.floor(Math.random() * (max - min)) + min;
         numberText = $("#number-text").text("Target Number: " + randomTargetNumber);
+        console.log(randomTargetNumber);
 
     };
 
-    InitializeGame()
-    
+    InitializeGame();
+ 
 
-    $(".gem").click(function () { 
-        $("#score-text").html("Your Score: " + scoreTotal);
 
+    // $("#").click(function () { 
+    // $(document).on("click", ".gem", function() {
+    $("#imageDiv").on("click", ".gem", function () {
         var gemValue = ($(this).attr("data-crystalvalue"));
         gemValue = parseInt(gemValue);
 
-        
-        scoreTotal += gemValue;
-
-        // generateRandomValue(1,12);
+        scoreTotal = scoreTotal + gemValue;
+        // scoreText = $("#score-text").text("Your Score: " + scoreTotal);
         
         
-
-        // scoreTotal += randomValue;
-
-        // if ($(".gem").click(function(){
-        //     var randomValue = Math.floor(Math.random() * (12 - 1)) + 1;
-        //     scoreTotal += randomVaule;
-        // })
-
-        
+        if (scoreTotal === randomTargetNumber) {
+            wins++;
             
-            
+            updateDom();
+            resetGame();
+        }
         
+        if (scoreTotal > randomTargetNumber) {
+            losses++;
+            updateDom();
+            resetGame();
+        }
 
-        
-        
-        
-        // console.log("HELLLO!");
-        console.log(this);
-    ;
-    
-    //when you click on the image gem, the the value of that gem gets added to the total score.
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    // $("#gem-1").click(function () {  
-
-    //     // scoreTotal += "Your Score: " + randomRubyValue; //(the variable connected to the ruby)
-    //     $("#score-text").html(scoreTotal); //(this connects the score to that html text)
-    //     // compareTargetNumberGemTotal ();  //(this calls out that if and else statement function into this gem function. Do that same for other gems)
-        
-    //     scoreTotal += randomRubyValue;
-            
-    //         alert("It worked!");
-    //         console.log("ruby")
-
-    // });
-
-    // $(sapphire).click(function () { 
-
-    
-    // // scoreTotal = "Your Score: " + randomSapphireValue; 
-    // $("#score-text").html(scoreTotal); 
-    // // compareTargetNumberGemTotal ();  
-
-    //     scoreTotal += randomSapphireValue;
-
-    //     alert("It worked!");
-    //     console.log("sapphire")
-
-    // });
-
-    // $(emerald).click(function () {  
-
-    // // scoreTotal = "Your Score: " + randomEmeraldValue; 
-    // $("#score-text").html(scoreTotal); 
-    // // compareTargetNumberGemTotal (); 
-
-    // scoreTotal += randomEmeraldValue;
-
-    //     alert("It worked!");
-    //     console.log("emerald")
-
-    // });
-
-    // $(diamond).click(function () {  
-
-    // // scoreTotal = "Your Score: "+ randomDiamondValue; 
-    // $("#score-text").html(scoreTotal); 
-    // // compareTargetNumberGemTotal ();  
-
-    // scoreTotal += randomDiamondValue;
-
-    //     alert("It worked!");
-    //     console.log("diamond")
-
-    // });
-});
-
-// gemValues();
-
-// function gemValues() {
-//     if (randomRubyValue === randomSapphireValue) {
-//         generateRandomSapphireValue(1, 12);
-//     }
-// }
+        updateDom();
 
 
+    }); //related to (document).ready
 
-// scoring();
-
-// function scoring() {
-//     if ($(ruby).click(function(){})) {
-//         scoreTotal += randomRubyValue;
-// };
-
-// Click/Scoring
-// 1: When you click on a gem, the score will increase.
-// 2: Each gem should have a different value and one gem must have a value of one.
-
-// compareTargetNumberGemTotal();
-// function compareTargetNumberGemTotal() {
-
-    
-//     if (scoreTotal === randomTargetNumber) {
-//         wins++;
-//         updateDom();
-//         resetGame();
-//         generateRandomTargetNum();
-        
-//     } else if (scoreTotal > randomTargetNumber) {
-//         losses--;
-//         updateDom();
-//         resetGame();
-//         generateRandomTargetNum();
-
-//     }
-// }
-});
+    });
